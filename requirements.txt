@@ -1,0 +1,6 @@
+panda
+scikit-learn
+numpy
+
+
+-e .
