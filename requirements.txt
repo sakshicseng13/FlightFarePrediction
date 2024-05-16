@@ -1,6 +1,7 @@
-panda
+pandas
 scikit-learn
 numpy
-
+matplotlib
+seaborn
 
 -e .
