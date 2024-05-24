@@ -10,6 +10,8 @@ from src.FlightFarePredictionS.utils.utils import save_object
 from src.FlightFarePredictionS.utils.utils import evaluate_model
 
 from sklearn.linear_model import LinearRegression, Ridge,Lasso,ElasticNet
+from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor, AdaBoostRegressor
+from sklearn.tree import DecisionTreeRegressor
 
 
 @dataclass 
@@ -21,21 +23,20 @@ class ModelTrainer:
     def __init__(self):
         self.model_trainer_config = ModelTrainerConfig()
     
-    def initate_model_training(self,train_array,test_array):
+    def initiate_model_training(self,X_train, y_train, X_test, y_test):
         try:
             logging.info('Splitting Dependent and Independent variables from train and test data')
-            X_train, y_train, X_test, y_test = (
-                train_array[:,:-1],
-                train_array[:,-1],
-                test_array[:,:-1],
-                test_array[:,-1]
-            )
+             
 
             models={
-            'LinearRegression':LinearRegression(),
-            'Lasso':Lasso(),
-            'Ridge':Ridge(),
-            'Elasticnet':ElasticNet()
+            'Linear_regression':LinearRegression(), 
+         'Elastic_net': ElasticNet(), 
+         'Lasso':Lasso(), 
+         'ridge':Ridge(), 
+         'random_forest':RandomForestRegressor(), 
+         'Gradient_boost': GradientBoostingRegressor(), 
+         'Ada_boost': AdaBoostRegressor(), 
+         'Decision_tree': DecisionTreeRegressor()
         }
             
             model_report:dict=evaluate_model(X_train,y_train,X_test,y_test,models)
